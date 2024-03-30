@@ -20,4 +20,35 @@
     <!-- Container to display car information -->
     <div id="carInfo"></div>
   </body>
+  <script>
+    function Car(brand, model, year, color, price, gas) {
+      this.brand = brand;
+      this.model = model;
+      this.year = year;
+      this.color = color;
+      this.price = price;
+      this.gas = gas;
+
+      this.honk = function () {
+        console.log("Tuut tuut");
+        console.log(
+          `Brand: ${this.brand}, Model: ${this.model}, Year: ${this.year}, Color: ${this.color}, Price: ${this.price}`
+        );
+      };
+
+      this.raceTurn = function (currentYear) {
+        let gasLoss = 5;
+        if (this.year !== currentYear) {
+          gasLoss += currentYear - this.year;
+        }
+        this.gas -= gasLoss;
+        if (this.gas < 0) {
+          this.gas = 0; // Set gas to 0 if it goes negative
+        }
+        console.log(
+          `After the turn, ${this.brand} ${this.model} has ${this.gas} liters of gas remaining.`
+        );
+      };
+    }
+  </script>
 </html>
