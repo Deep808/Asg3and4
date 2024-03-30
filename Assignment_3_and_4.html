@@ -21,7 +21,9 @@
     <div id="carInfo"></div>
   </body>
   <script>
+    // Define a constructor function for Car objects
     function Car(brand, model, year, color, price, gas) {
+      // Initialize properties for each Car object
       this.brand = brand;
       this.model = model;
       this.year = year;
@@ -29,6 +31,7 @@
       this.price = price;
       this.gas = gas;
 
+      // Method to make the car honk
       this.honk = function () {
         console.log("Tuut tuut");
         console.log(
@@ -36,20 +39,27 @@
         );
       };
 
+      // Method to simulate a race turn
       this.raceTurn = function (currentYear) {
         let gasLoss = 5;
+        // Adjust gas loss based on the difference between the car's year and the current year
         if (this.year !== currentYear) {
           gasLoss += currentYear - this.year;
         }
+        // Decrease gas level
         this.gas -= gasLoss;
+        // Ensure gas level doesn't go negative
         if (this.gas < 0) {
-          this.gas = 0; // Set gas to 0 if it goes negative
+          this.gas = 0;
         }
+        // Output the result of the race turn
         console.log(
           `After the turn, ${this.brand} ${this.model} has ${this.gas} liters of gas remaining.`
         );
       };
     }
+
+    // Array of cars participating in the race
     const cars = [
       new Car("Honda", "CR-V", 2023, "Red", 50000, 45),
       new Car("Ford", "F-150", 2020, "Black", 25000, 30),
@@ -59,15 +69,23 @@
       new Car("Kia", "Forte", 2020, "Blue", 21000, 56),
     ];
 
+    // Number of race turns
     const raceTurns = 7;
+
+    // Get the current year
     const currentYear = new Date().getFullYear();
 
+    // Get the div where car information will be displayed
     const carInfoDiv = document.getElementById("carInfo");
 
+    // Loop through each race turn
     for (let turn = 1; turn <= raceTurns; turn++) {
+      // Display the turn number
       carInfoDiv.innerHTML += `<h2>Turn ${turn}</h2>`;
+      // Simulate a race turn for each car
       cars.forEach((car) => {
-        car.raceTurn(currentYear);
+        car.raceTurn(currentYear); // Simulate race turn
+        // Display remaining gas for each car
         carInfoDiv.innerHTML += `<p>${car.brand} ${car.model}: ${car.gas} liters remaining</p>`;
       });
     }
